@@ -70,6 +70,8 @@
 		String senha = request.getParameter("senha");
 		String idade = request.getParameter("idade"); /* Alterar para tipo numérico */
 		
+		
+		
 		%>
 	
 	</body>
