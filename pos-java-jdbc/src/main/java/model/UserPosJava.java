@@ -12,7 +12,6 @@ public class UserPosJava {
 	}
 	
 	public UserPosJava(Long id, String nome, String email, String senha) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
