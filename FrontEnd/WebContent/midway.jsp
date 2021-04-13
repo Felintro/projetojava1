@@ -15,22 +15,7 @@
 	</head>
 
 	<body>
-		<!-- Mini Curso de Front-End
-		
-		
-			Tags importantes:	
-			
-			 <b></b> - Negrito
-			 <i></i> - Itálico
-			 <p></p> - Parágrafo
-			 <h1></h1> - Tamanho da fonte (o numero representa a proporção).
-			
-		
-		
-		-->
-		 
-		 
-	
+
 		<form action="" method="post" onsubmit="return validarDados() ? true : false">
 	
 			<table style="background: black; color: white; width: 250px">
@@ -64,6 +49,12 @@
 					<td><input type="password" id="senha" name="senha"
 						style="width: 95%; border-radius: 5px"></td>
 				</tr>
+				
+				<tr>
+					<td><label style="color: white">Idade:</label></td>
+					<td><input type="text" id="idade" name="idade"
+						style="width: 95%; border-radius: 5px"></td>
+				</tr>
 	
 				<tr>
 					<td />
@@ -80,10 +71,7 @@
 		String nome = request.getParameter("nome");
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
-		
-		
-		
-		
+		String idade = request.getParameter("idade"); /* Alterar para tipo numérico */
 		
 		%>
 	
