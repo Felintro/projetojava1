@@ -1,0 +1,41 @@
+<html>
+<body>
+	<h1>Hello World</h1>
+	<section>
+		<form>
+			<fieldset>
+				<legend>Conta: </legend>
+				<label>Login:</label> <input type="text" required name="login"
+					min="3" max="8" placeholder="Insira seu login aqui..." /> <label>Senha:</label>
+				<input type="password" required name="senha" /> <input
+					type="submit" value="Enviar" />
+			</fieldset>
+			<fieldset>
+				<legend>Dados: </legend>
+				<label>Estado:</label>
+					<select>
+						<option value="RJ">Rio de Janeiro</option>
+						<option value="SP">São Paulo</option>
+						<option value="MG">Minas Gerais</option>
+						<option value="ES">Espírito Santo</option>
+						<option value="PR" selected>Paraná</option>
+						<option value="SC">Santa Catarina</option>
+					</select>
+				<p>
+					<label>Filhos: </label> <input type="number" min="0" max="6" />
+				<p>
+					<label>Data de Nascimento: </label> <input type="date" />
+				<p>
+					<label>Curriculo: </label> <input type="file" /> <input
+						type="button" value="Clique aqui" />
+					<button>Clique aqui</button>
+			</fieldset>
+			<fieldset>
+				<label>Mensagem</label>
+				<textarea name="mensagem" maxlength="10">
+        </textarea>
+			</fieldset>
+		</form>
+	</section>
+</body>
+</html>
