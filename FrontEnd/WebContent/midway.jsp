@@ -6,6 +6,7 @@
 <html lang="pt-br">
 
 	<head>
+		<title>Projetinho Java</title>
 		<meta charset = "UTF-8">
 		<style type="text/css">
 			body {
@@ -19,10 +20,6 @@
 		<form action="" method="post" onsubmit="return validarDados() ? true : false">
 	
 			<table style="background: black; color: white; width: 250px">
-	
-				<tr>
-					<td><label>Mini-Curso de Front-End</label></td>
-				</tr>
 	
 				<tr>
 					<td><label>Telinha de cadastro:</label></td>
@@ -52,7 +49,7 @@
 				
 				<tr>
 					<td><label style="color: white">Idade:</label></td>
-					<td><input type="text" id="idade" name="idade"
+					<td><input type="text" id="idade" name="idade" 
 						style="width: 95%; border-radius: 5px"></td>
 				</tr>
 	
