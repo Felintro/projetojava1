@@ -6,16 +6,19 @@ public class UserPosJava {
 	private String nome;
 	private String email;
 	private String senha;
+	private int idade;
 	
+
 	public UserPosJava() {
 		
 	}
 	
-	public UserPosJava(Long id, String nome, String email, String senha) {
+	public UserPosJava(Long id, String nome, String email, String senha, int idade) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
+		this.idade = idade;
 	}
 	
 	/* Getters & Setters */
@@ -46,11 +49,20 @@ public class UserPosJava {
 		this.senha = senha;
 	}
 	
+	public int getIdade() {
+		return idade;
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+	
 	/* toString */
 	
 	@Override
 	public String toString() {
-		return "UserPosJava [id=" + id + ", nome=" + nome + ", email=" + email + "]";
+		return "UserPosJava [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", idade=" + idade
+				+ "]";
 	}
 	
 	/* Equals e Hashcode */
@@ -61,6 +73,7 @@ public class UserPosJava {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + idade;
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		return result;
@@ -84,6 +97,8 @@ public class UserPosJava {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (idade != other.idade)
+			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
@@ -96,8 +111,5 @@ public class UserPosJava {
 			return false;
 		return true;
 	}
-	
-	
-	
 	
 }
