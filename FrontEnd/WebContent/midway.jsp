@@ -1,0 +1,91 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.Import"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+	<head>
+		<meta charset = "UTF-8">
+		<style type="text/css">
+			body {
+				background-color: #708090;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Mini Curso de Front-End
+		
+		
+			Tags importantes:	
+			
+			 <b></b> - Negrito
+			 <i></i> - Itálico
+			 <p></p> - Parágrafo
+			 <h1></h1> - Tamanho da fonte (o numero representa a proporção).
+			
+		
+		
+		-->
+		 
+		 
+	
+		<form action="" method="post" onsubmit="return validarDados() ? true : false">
+	
+			<table style="background: black; color: white; width: 250px">
+	
+				<tr>
+					<td><label>Mini-Curso de Front-End</label></td>
+				</tr>
+	
+				<tr>
+					<td><label>Telinha de cadastro:</label></td>
+				</tr>
+	
+			</table>
+	
+			<table style="background: black; color: white; width: 250px">
+	
+				<tr>
+					<td><label>Nome:</label></td>
+					<td><input type="text" id="nome" name="nome"
+						style="width: 95%; border-radius: 5px"></td>
+				</tr>
+	
+				<tr>
+					<td><label style="color: white">Login:</label></td>
+					<td><input type="text" id="login" name="login"
+						style="width: 95%; border-radius: 5px"></td>
+				</tr>
+	
+				<tr>
+					<td><label style="color: white">Senha:</label></td>
+					<td><input type="password" id="senha" name="senha"
+						style="width: 95%; border-radius: 5px"></td>
+				</tr>
+	
+				<tr>
+					<td />
+					<td><input type="submit" value="Cadastrar"
+						style="width: 100%; border-radius: 5px;"></td>
+				</tr>
+	
+			</table>
+	
+		</form>
+	
+		<%
+		
+		String nome = request.getParameter("nome");
+		String login = request.getParameter("login");
+		String senha = request.getParameter("senha");
+		
+		
+		
+		
+		
+		%>
+	
+	</body>
+</html>
