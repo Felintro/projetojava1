@@ -8,7 +8,6 @@ public class UserPosJava {
 	private String senha;
 	private int idade;
 	
-
 	public UserPosJava() {
 		
 	}

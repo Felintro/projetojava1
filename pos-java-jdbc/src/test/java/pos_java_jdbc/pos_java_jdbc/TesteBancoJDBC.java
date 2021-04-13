@@ -13,6 +13,8 @@ import model.UserPosJava;
 
 public class TesteBancoJDBC {
 	
+	/* Classe criada no intuito de testar a conexão com o banco de dados através de queries simples */
+	
 	@Test
 	public void testeConexaoBanco() throws SQLException {
 		
