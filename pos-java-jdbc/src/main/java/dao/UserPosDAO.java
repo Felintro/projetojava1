@@ -29,12 +29,12 @@ public class UserPosDAO {
 			
 			System.out.println("Iniciando sequência de Commit!");
 	
-			String sql = "INSERT INTO userposjava (nome, email) VALUES (?, ?);";	/* Preparar a Query SQL */
+			String sql = "INSERT INTO userposjava (nome, email, login, idade) VALUES (?, ?, ?, ?);";	/* Preparar a Query SQL */
 			PreparedStatement insert = connection.prepareStatement(sql);			/* Injetar a Query no objeto connection */
 
-			// insert.setLong(1, userPosJava.getId()); 		/* Recebimento dos dados */
 			insert.setString(1, userPosJava.getNome()); 	/* Recebimento dos dados */
 			insert.setString(2, userPosJava.getEmail()); 	/* Recebimento dos dados */
+			
 
 			/* FIM BLOCO */
 
@@ -55,7 +55,7 @@ public class UserPosDAO {
 
 	}
 	
-	public List<UserPosJava> sqlSelect	(int id) throws SQLException{
+	public List<UserPosJava> sqlSelect (int id) throws SQLException{
 		
 		List<UserPosJava> lista = new ArrayList<>();	/* Lista responsável por recuperar os dados oriundos do banco */
 		

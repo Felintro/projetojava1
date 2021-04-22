@@ -36,8 +36,8 @@
 				</tr>
 	
 				<tr>
-					<td><label style="color: white">Login:</label></td>
-					<td><input type="text" id="login" name="login"
+					<td><label style="color: white">E-mail:</label></td>
+					<td><input type="text" id="email" name="email"
 						style="width: 95%; border-radius: 5px"></td>
 				</tr>
 	
