@@ -59,7 +59,7 @@ public class ModelUser {
 
 	@Override
 	public String toString() {
-		return "Model: [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", age=" + age
+		return "Mode: [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", age=" + age
 				+ "]";
 	}
 	
