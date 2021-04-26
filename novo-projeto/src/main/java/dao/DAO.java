@@ -164,7 +164,7 @@ public class DAO {
 		
 	} */
 	
-	public void sqlInsert2 (ModelUser user) throws SQLException {
+	public void sqlInsertToRegister (ModelUser user) throws SQLException {
 		
 		try {
 			
@@ -193,7 +193,7 @@ public class DAO {
 		
 	}
 	
-	public void sqlInsertToRegister() throws SQLException { 
+	public void InsertToRegister() throws SQLException { 
 		
 		/* Método criado para transferir os dados da tabela userposjava para a tabela register */
 		
@@ -201,7 +201,7 @@ public class DAO {
 		
 		for (ModelUser user : list) {
 			
-			sqlInsert2(user);
+			sqlInsertToRegister(user);
 			
 			try {
 				Thread.sleep(1000);

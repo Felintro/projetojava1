@@ -107,9 +107,7 @@ public class TestDatabase {
 		
 		DAO dao = new DAO();
 		
-		dao.sqlInsertToRegister();
-		
-		
+		dao.InsertToRegister();
 		
 	}
 	
