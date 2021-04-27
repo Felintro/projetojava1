@@ -23,7 +23,7 @@ public class ModelUser {
 	private String _password;
 	private short _age;
 	
-	/* Construtores */
+	/* Construtore */
 	
 	public ModelUser() {
 		
