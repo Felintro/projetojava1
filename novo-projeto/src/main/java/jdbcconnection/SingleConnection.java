@@ -3,27 +3,43 @@ package jdbcconnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import constant.ConfigConstant;
+
 public class SingleConnection {
 	
-	private static String url = "jdbc:postgresql://localhost:5432/posjava";
-	private static String user = "postgres";
-	private static String password = "admin";
-	private static Connection connection = null;
-	private static String driver = "org.postgresql.Driver";
+	/* Classe criada para conectar a aplicação ao banco de dados
+	*  
+	*  Utilizado o padrão Singleton
+	* 
+	*/
 	
-	static {
-		conectar();
+	/* Atributos */
+	
+	private static String url = ConfigConstant.DATABASE_URL; 			/* URL do banco de dados */
+	private static String user = ConfigConstant.DATABASE_USER;			/* Usuário do banco de dados */
+	private static String password = ConfigConstant.DATABASE_PASSWORD;	/* Senha do banco de dados */
+	private static String driver = ConfigConstant.DATABASE_DRIVER;		/* Driver do banco de dados */
+	private static Connection connection = null;
+	
+	static { 
+		/* Qualquer instância desta classe, o método conectar será executado! */
+		connect();
 	}
+	
+	/* Construtor */
 	
 	public SingleConnection() {
-		conectar();
+		connect();
 	}
 	
-	private static void conectar() {
+	/* Métodos */
+	
+	private static void connect() {
 		
 		try {
 			
 			if(connection == null) {
+				
 				Class.forName(driver);
 				connection = DriverManager.getConnection(url, user, password);
 				connection.setAutoCommit(false);
@@ -31,9 +47,13 @@ public class SingleConnection {
 				
 			}
 
-		} catch (Exception e) {
+		} 
+		
+		catch (Exception e) {
+			
 			System.out.println("Erro ao efetuar a conexão com o banco de dados!");
 			e.printStackTrace();
+			
 		}
 		
 	}

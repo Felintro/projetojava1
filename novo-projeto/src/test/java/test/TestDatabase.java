@@ -4,6 +4,8 @@ package test;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.junit.jupiter.api.Test;
 
 import dao.DAO;
@@ -20,28 +22,35 @@ public class TestDatabase {
 	}
 	
 	@Test
-	public void testInsert() throws SQLException {
+	public void testInsertIntoRegister() throws SQLException {
 		
 		ModelUser user = new ModelUser();
 		DAO dao = new DAO();
 		
-		user.setEmail("betou2213@gmail.com");
-		user.setName("BEto");
-		user.setAge((short) 32);
-		user.setPassword("12456");
+		String _name = JOptionPane.showInputDialog("Insira o nome:");
+		String _email = JOptionPane.showInputDialog("Insira o email:");
+		String _password = JOptionPane.showInputDialog("Insira a senha:");
+		short _age = (short) Integer.parseInt(JOptionPane.showInputDialog("Insira a idade:"));
+		
+		user.setName(_name);
+		user.setEmail(_email);
+		user.setPassword(_password);
+		user.setAge(_age);
 
-		dao.sqlInsert(user);
+		dao.sqlInsertIntoRegister(user);
+		
+		/* Teste executado! */
 		
 	}
 	
 	@Test
-	public void testSelect() {
+	public void testSelectAllUserposjava() {
 		
 		DAO dao = new DAO();
 		
 		try {
 			
-			List<ModelUser> list = dao.sqlSelectAll();
+			List<ModelUser> list = dao.sqlSelectAllUserposjava();
 			
 			for (ModelUser model : list) {
 				System.out.println(model);
@@ -76,15 +85,15 @@ public class TestDatabase {
 	}
 	
 	@Test
-	public void testSelectByNome() {
+	public void testSelectByName() {
 		
 		DAO dao = new DAO();
 		
-		String nome = "beto";
+		String _name = "beto";
 		
 		try {
 			
-			List<ModelUser> list = dao.sqlSelectByNome(nome);
+			List<ModelUser> list = dao.sqlSelectByName(_name);
 			
 			for (ModelUser model : list) {
 				
@@ -103,11 +112,11 @@ public class TestDatabase {
 	}
 	
 	@Test
-	public void testInsertToRegister() throws SQLException {
+	public void testTransferToRegister() throws SQLException {
 		
 		DAO dao = new DAO();
 		
-		dao.InsertToRegister();
+		dao.TransferToRegister();
 		
 	}
 	

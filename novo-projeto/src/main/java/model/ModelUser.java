@@ -2,11 +2,26 @@ package model;
 
 public class ModelUser {
 	
-	private short id;
-	private String name;
-	private String email;
-	private String password;
-	private short age;
+/*  Classe modelo para processamento do banco de dados. 
+ *  
+ *  Tabela configurada dinamicamente pela classe ConfigConstant.
+ *  
+ *  Códigos escritos em inglês para treinar a aplicação de boas práticas de código.
+ *  
+ *  Comentários em português para fácil entendimento.
+ *  
+ *  As colunas do banco de dados foram nomeadas com _ antes do nome do atributo devido os nomes em inglês
+ *  coincidirem com palavras reservadas do SQL. Logo, o atributo de nome (por exemplo), virou _name.
+ *  
+*/
+	
+	/* Atributos */
+	
+	private short _id;
+	private String _name;
+	private String _email;
+	private String _password;
+	private short _age;
 	
 	/* Construtores */
 	
@@ -14,53 +29,54 @@ public class ModelUser {
 		
 	}
 	
-	public ModelUser(short id, String name, String email, String password, short age) {
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.age = age;
+	public ModelUser(short _id, String _name, String _email, String _password, short _age) {
+		this._id = _id;
+		this._name = _name;
+		this._email = _email;
+		this._password = _password;
+		this._age = _age;
 	}
 	
 	/* Gets e Sets */
 	
 	public long getId() {
-		return id;
+		return _id;
 	}
-	public void setId(short id) {
-		this.id = id;
+
+	public void setId(short _id) {
+		this._id = _id;
 	}
 	public String getName() {
-		return name;
+		return _name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String _name) {
+		this._name = _name;
 	}
 	public String getEmail() {
-		return email;
+		return _email;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail(String _email) {
+		this._email = _email;
 	}
 	public String getPassword() {
-		return password;
+		return _password;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword(String _password) {
+		this._password = _password;
 	}
 	public short getAge() {
-		return age;
+		return _age;
 	}
-	public void setAge(short age) {
-		this.age = age;
+	public void setAge(short _age) {
+		this._age = _age;
 	}
-	
-	/* Método toString */
 
+	/* Método toString */
+	
 	@Override
 	public String toString() {
-		return "Model: [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", age=" + age
-				+ "]";
+		return "ModelUser [_id=" + _id + ", _name=" + _name + ", _email=" + _email + ", _password=" + _password
+				+ ", _age=" + _age + "]";
 	}
 	
 }
