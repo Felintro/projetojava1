@@ -4,7 +4,7 @@ import java.sql.Connection;
 
 public class ConfigConstant {
 	
-	/* Classe para ajustes de constantes */
+	/* Classe para ajustes de parametros */
 	
 	public static String DATABASE_TABLE = "register";										/* Tabela */
 	public static String DATABASE_URL = "jdbc:postgresql://localhost:5432/posjava";			/* URL do banco */
