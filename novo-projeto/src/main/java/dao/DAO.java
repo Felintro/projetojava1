@@ -92,7 +92,12 @@ public class DAO {
 	
 	public List<ModelUser> sqlSelectByName(String _name) throws SQLException {
 		
-		/* Método em uso, select para a tabela register com filtro na coluna _name */
+		/* Método em uso, select para a tabela register com filtro na coluna _name 
+		 * 
+		 * Método retorna uma lista, pois podemos ter mais de 1 registro no banco, cujo
+		 * nome seja igual.
+		 * 
+		 * */
 		
 		List<ModelUser> list = new ArrayList<>();
 		

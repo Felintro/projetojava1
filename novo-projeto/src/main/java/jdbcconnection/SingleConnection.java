@@ -22,7 +22,6 @@ public class SingleConnection {
 	private static Connection connection = null;
 	
 	static { 
-		/* Qualquer instância desta classe, o método conectar será executado! */
 		connect();
 	}
 	
