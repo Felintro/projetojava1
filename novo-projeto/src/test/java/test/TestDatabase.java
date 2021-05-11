@@ -37,7 +37,7 @@ public class TestDatabase {
 		user.setPassword(_password);
 		user.setAge(_age);
 
-		dao.sqlInsertIntoRegister(user);
+		dao.sqlInsert(user);
 		
 		/* Teste executado! */
 		
@@ -50,7 +50,7 @@ public class TestDatabase {
 		
 		try {
 			
-			List<ModelUser> list = dao.sqlSelectAllUserposjava();
+			List<ModelUser> list = dao.sqlSelectUserposjava();
 			
 			for (ModelUser model : list) {
 				System.out.println(model);

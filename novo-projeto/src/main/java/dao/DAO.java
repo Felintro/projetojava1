@@ -31,7 +31,7 @@ public class DAO {
 
 	private Connection connection;
 	
-	/* Construtor*/
+	/* Construtor */
 	
 	public DAO() {
 		connection = SingleConnection.getConnection();
@@ -39,21 +39,21 @@ public class DAO {
 	
 	/* Métodos para execução das queries SQL */
 	
-	public void sqlInsertIntoRegister(ModelUser user) throws SQLException {
+	public void sqlInsert(ModelUser user) throws SQLException {
 		
-		/* Método em uso, insert para a tabela register */
+		/* Método em uso, insert para a tabela */
 			
 		try {
 			
 			String query = "INSERT INTO " + ConfigConstant.DATABASE_TABLE + " (_name, _email, _password, _age) VALUES (?, ?, ?, ?)";
-			PreparedStatement insertToRegister = connection.prepareStatement(query);
+			PreparedStatement insert = connection.prepareStatement(query);
 			
-			insertToRegister.setString(1, user.getName());
-			insertToRegister.setString(2, user.getEmail());
-			insertToRegister.setString(3, user.getPassword());
-			insertToRegister.setShort(4, user.getAge());
+			insert.setString(1, user.getName());
+			insert.setString(2, user.getEmail());
+			insert.setString(3, user.getPassword());
+			insert.setShort(4, user.getAge());
 			
-			insertToRegister.executeUpdate();
+			insert.executeUpdate();
 			connection.commit();
 			System.out.println("Query executada com sucesso!");
 			
@@ -72,7 +72,7 @@ public class DAO {
 	
 	public ModelUser sqlSelectById(short _id) throws SQLException { //Em TEste!
 		
-		/* Método em uso, select para a tabela register com filtro na coluna _id */
+		/* Método em uso, select com filtro na coluna _id */
 		
 		ModelUser user = new ModelUser();
 		
@@ -92,7 +92,7 @@ public class DAO {
 	
 	public List<ModelUser> sqlSelectByName(String _name) throws SQLException {
 		
-		/* Método em uso, select para a tabela register com filtro na coluna _name 
+		/* Método em uso, select com filtro na coluna _name 
 		 * 
 		 * Método retorna uma lista, pois podemos ter mais de 1 registro no banco, cujo
 		 * nome seja igual.
@@ -119,7 +119,7 @@ public class DAO {
 	
 	public ModelUser sqlSelectByEmail(String _email) throws SQLException {
 		
-		/* Método em uso, select para a tabela register com filtro na coluna _email */
+		/* Método em uso, select com filtro na coluna _email */
 		
 		ModelUser user = new ModelUser();
 		
@@ -135,7 +135,7 @@ public class DAO {
 
 	public List<ModelUser> sqlSelectByAge(short _age) throws SQLException {
 		
-		/* Método em uso, select para a tabela register com filtro na coluna _age */
+		/* Método em uso, select com filtro na coluna _age */
 		
 		List<ModelUser> list = new ArrayList<>();
 		
@@ -156,11 +156,11 @@ public class DAO {
 		
 	/* Método criado para transferir os dados da tabela userposjava para a tabela register */
 		
-		List<ModelUser> list = sqlSelectAllUserposjava();
+		List<ModelUser> list = sqlSelectUserposjava();
 		
 		for (ModelUser user : list) {
 			
-			sqlInsertIntoRegister(user);
+			sqlInsert(user);
 			
 			try {
 				Thread.sleep(1000);
@@ -192,7 +192,6 @@ public class DAO {
 			connection.commit();
 			System.out.println("Query executada com sucesso!");
 			
-			
 		}
 		
 		catch(Exception e) {
@@ -206,7 +205,7 @@ public class DAO {
 		
 	}
 	
-	public List<ModelUser> sqlSelectAllUserposjava() throws SQLException {
+	public List<ModelUser> sqlSelectUserposjava() throws SQLException {
 		
 	/* Método de select para tabela userposjava */
 		
