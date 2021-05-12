@@ -22,7 +22,7 @@ public class TestDatabase {
 	}
 	
 	@Test
-	public void testInsertIntoRegister() throws SQLException {
+	public void testInsert() throws SQLException {
 		
 		ModelUser user = new ModelUser();
 		DAO dao = new DAO();
@@ -44,7 +44,7 @@ public class TestDatabase {
 	}
 	
 	@Test
-	public void testSelectAllUserposjava() {
+	public void testSelectUserposjava() {
 		
 		DAO dao = new DAO();
 		
