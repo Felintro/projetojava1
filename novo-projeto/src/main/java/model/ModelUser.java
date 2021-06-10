@@ -39,7 +39,7 @@ public class ModelUser {
 	
 	/* Gets e Sets */
 	
-	public long getId() {
+	public short getId() {
 		return _id;
 	}
 

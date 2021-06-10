@@ -45,15 +45,15 @@ public class DAO {
 			
 		try {
 			
-			String query = "INSERT INTO " + ConfigConstant.DATABASE_TABLE + " (_name, _email, _password, _age) VALUES (?, ?, ?, ?)";
+			String query = "INSERT INTO " + ConfigConstant.DATABASE_TABLE + " (_name, _email, _password, _age) VALUES (?, ?, ?, ?);";
 			PreparedStatement insert = connection.prepareStatement(query);
-			
+
 			insert.setString(1, user.getName());
 			insert.setString(2, user.getEmail());
 			insert.setString(3, user.getPassword());
 			insert.setShort(4, user.getAge());
 			
-			insert.executeUpdate();
+			insert.execute();
 			connection.commit();
 			System.out.println("Query executada com sucesso!");
 			
@@ -66,11 +66,38 @@ public class DAO {
 			System.out.println("Rollback executado com sucesso!\nQuery revertida.");
 			e.printStackTrace();
 				
-	}
-			
 		}
+			
+	}
 	
-	public ModelUser sqlSelectById(short _id) throws SQLException { //Em TEste!
+	public void sqlUpdateName(ModelUser user) throws SQLException {
+		
+		try {
+			
+			String query = "UPDATE " + ConfigConstant.DATABASE_TABLE + " SET _name = ?, _email = ?, _password = ?, _age = ?  WHERE _id = ?;";
+			
+			PreparedStatement update = connection.prepareStatement(query);
+			
+			update.setString(1, user.getName());
+			update.setString(2, user.getEmail());
+			update.setString(3, user.getPassword());
+			update.setShort(4, user.getAge());
+			update.setShort(5, user.getId());
+			
+			update.execute();
+			System.out.println("Atualização executada com sucesso!");
+			
+			connection.commit();
+			
+		} catch (SQLException e) {
+			connection.rollback();
+			System.out.println("Erro identificado!\n\nQuery revertida!\n\n");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public ModelUser sqlSelectById(short _id) throws SQLException {
 		
 		/* Método em uso, select com filtro na coluna _id */
 		
@@ -226,7 +253,7 @@ public class DAO {
 		
 	}
 	
-	/* Métodos auxiliares */
+	/* Métodos auxiliares para reaproveitamento de código */
 	
 	private void treatList(ResultSet result, List<ModelUser> list) throws SQLException {
 		
@@ -249,7 +276,7 @@ public class DAO {
 	private void treatModelUser(ResultSet result, ModelUser user) throws SQLException {
 		
 	/* Método responsável por receber um ResultSet e um ModelUser
-	*  e setar os atributos do objeto.
+	*  e setar os atributos do objeto ao receber um ResultSet vindo de uma consulta ao banco de dados
 	*/
 		
 		user.setId(result.getShort("_id"));
