@@ -45,13 +45,18 @@ public class DAO {
 			
 		try {
 			
-			String query = "INSERT INTO " + ConfigConstant.DATABASE_TABLE + " (_name, _email, _password, _age) VALUES (?, ?, ?, ?);";
+			ConfigConstant config = new ConfigConstant();
+			
+			
+			String query = "INSERT INTO ? (_name, _email, _password, _age) VALUES (?, ?, ?, ?);";
 			PreparedStatement insert = connection.prepareStatement(query);
 
-			insert.setString(1, user.getName());
-			insert.setString(2, user.getEmail());
-			insert.setString(3, user.getPassword());
-			insert.setShort(4, user.getAge());
+			insert.setString(1, ConfigConstant.DATABASE_TABLE);
+			insert.setString(2, user.getName());
+			insert.setString(3, user.getEmail());
+			insert.setString(4, user.getPassword());
+			insert.setShort(5, user.getAge());
+			
 			
 			insert.execute();
 			connection.commit();
@@ -74,15 +79,16 @@ public class DAO {
 		
 		try {
 			
-			String query = "UPDATE " + ConfigConstant.DATABASE_TABLE + " SET _name = ?, _email = ?, _password = ?, _age = ?  WHERE _id = ?;";
+			String query = "UPDATE ? SET _name = ?, _email = ?, _password = ?, _age = ?  WHERE _id = ?;";
 			
 			PreparedStatement update = connection.prepareStatement(query);
 			
-			update.setString(1, user.getName());
-			update.setString(2, user.getEmail());
-			update.setString(3, user.getPassword());
-			update.setShort(4, user.getAge());
-			update.setShort(5, user.getId());
+			update.setString(1, ConfigConstant.DATABASE_TABLE);
+			update.setString(2, user.getName());
+			update.setString(3, user.getEmail());
+			update.setString(4, user.getPassword());
+			update.setShort(5, user.getAge());
+			update.setShort(6, user.getId());
 			
 			update.execute();
 			System.out.println("Atualização executada com sucesso!");
@@ -103,9 +109,10 @@ public class DAO {
 		
 		ModelUser user = new ModelUser();
 		
-		String query = "SELECT * FROM " + ConfigConstant.DATABASE_TABLE + " WHERE _id= ?;";
+		String query = "SELECT * FROM ? WHERE _id= ?;";
 		PreparedStatement selectById = connection.prepareStatement(query);
-		selectById.setShort(1, _id);
+		selectById.setString(1, ConfigConstant.DATABASE_TABLE);
+		selectById.setShort(2, _id);
 		ResultSet result = selectById.executeQuery();
 		
 		while(result.next()) {
@@ -129,11 +136,12 @@ public class DAO {
 		
 		List<ModelUser> list = new ArrayList<>();
 		
-		String query = "SELECT * FROM " + ConfigConstant.DATABASE_TABLE + " WHERE _name = '?';";
+		String query = "SELECT * FROM ? WHERE _name = '?';";
 		/* No SQL usamos aspas simples '' para trabalhar com texto, por isso tivemos que aplicá-las acima */
 		
 		PreparedStatement selectByName = connection.prepareStatement(query);
-		selectByName.setString(1, _name);
+		selectByName.setString(1, ConfigConstant.DATABASE_TABLE);
+		selectByName.setString(2, _name);
 		ResultSet result = selectByName.executeQuery();
 		
 		
@@ -153,9 +161,10 @@ public class DAO {
 		
 		ModelUser user = new ModelUser();
 		
-		String query = "SELECT * FROM " + ConfigConstant.DATABASE_TABLE + " WHERE _email = '?';";
+		String query = "SELECT * FROM ? WHERE _email = '?';";
 		PreparedStatement selectByEmail = connection.prepareStatement(query);
-		selectByEmail.setString(1, _email);
+		selectByEmail.setString(1, ConfigConstant.DATABASE_TABLE);
+		selectByEmail.setString(2, _email);
 		ResultSet result = selectByEmail.executeQuery();
 		
 		treatModelUser(result, user);
@@ -170,9 +179,10 @@ public class DAO {
 		
 		List<ModelUser> list = new ArrayList<>();
 		
-		String query = "SELECT * FROM " + ConfigConstant.DATABASE_TABLE + " WHERE _age = ?;";
+		String query = "SELECT * FROM ? WHERE _age = ?;";
 		PreparedStatement selectByAge = connection.prepareStatement(query);
-		selectByAge.setShort(1, _age);
+		selectByAge.setString(1, ConfigConstant.DATABASE_TABLE);
+		selectByAge.setShort(2, _age);
 		ResultSet result = selectByAge.executeQuery();
 		
 		while (result.next()) {
