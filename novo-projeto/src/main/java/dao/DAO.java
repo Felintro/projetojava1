@@ -103,8 +103,9 @@ public class DAO {
 		
 		ModelUser user = new ModelUser();
 		
-		String query = "SELECT * FROM " + ConfigConstant.DATABASE_TABLE + " WHERE _id=" + _id + ";";
+		String query = "SELECT * FROM " + ConfigConstant.DATABASE_TABLE + " WHERE _id= ?;";
 		PreparedStatement selectById = connection.prepareStatement(query);
+		selectById.setShort(1, _id);
 		ResultSet result = selectById.executeQuery();
 		
 		while(result.next()) {
@@ -128,11 +129,13 @@ public class DAO {
 		
 		List<ModelUser> list = new ArrayList<>();
 		
-		String query = "SELECT * FROM " + ConfigConstant.DATABASE_TABLE + " WHERE _name='" + _name + "';";
+		String query = "SELECT * FROM " + ConfigConstant.DATABASE_TABLE + " WHERE _name = '?';";
 		/* No SQL usamos aspas simples '' para trabalhar com texto, por isso tivemos que aplicá-las acima */
 		
-		PreparedStatement selectByNome = connection.prepareStatement(query);
-		ResultSet result = selectByNome.executeQuery();
+		PreparedStatement selectByName = connection.prepareStatement(query);
+		selectByName.setString(1, _name);
+		ResultSet result = selectByName.executeQuery();
+		
 		
 		while(result.next()) {
 			
@@ -150,8 +153,9 @@ public class DAO {
 		
 		ModelUser user = new ModelUser();
 		
-		String query = "SELECT * FROM " + ConfigConstant.DATABASE_TABLE + " WHERE _email='" + _email + "';";
+		String query = "SELECT * FROM " + ConfigConstant.DATABASE_TABLE + " WHERE _email = '?';";
 		PreparedStatement selectByEmail = connection.prepareStatement(query);
+		selectByEmail.setString(1, _email);
 		ResultSet result = selectByEmail.executeQuery();
 		
 		treatModelUser(result, user);
@@ -166,8 +170,9 @@ public class DAO {
 		
 		List<ModelUser> list = new ArrayList<>();
 		
-		String query = "SELECT * FROM " + ConfigConstant.DATABASE_TABLE + " WHERE _age=" + _age + ";";
+		String query = "SELECT * FROM " + ConfigConstant.DATABASE_TABLE + " WHERE _age = ?;";
 		PreparedStatement selectByAge = connection.prepareStatement(query);
+		selectByAge.setShort(1, _age);
 		ResultSet result = selectByAge.executeQuery();
 		
 		while (result.next()) {
@@ -227,7 +232,7 @@ public class DAO {
 			connection.rollback();		/* Reverter a operação em caso de captura de exceção */
 			System.out.println("Rollback executado com sucesso!\nQuery revertida.");
 			e.printStackTrace();
-				
+			
 		}
 		
 	}
