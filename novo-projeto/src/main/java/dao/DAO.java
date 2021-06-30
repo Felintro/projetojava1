@@ -57,6 +57,8 @@ public class DAO {
 			insert.setString(4, user.getPassword());
 			insert.setShort(5, user.getAge());
 			
+			System.out.println("");
+			
 			
 			insert.execute();
 			connection.commit();
