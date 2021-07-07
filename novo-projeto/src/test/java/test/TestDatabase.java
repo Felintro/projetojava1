@@ -159,11 +159,11 @@ public class TestDatabase {
 	}
 	
 	@Test
-	public void testUpdateName() throws SQLException {
+	public void testUpdate() throws SQLException {
 		
 		DAO dao = new DAO();
 		
-		short id = Short.parseShort(JOptionPane.showInputDialog(null,"Insira o ID para atualizar:", "testUpdateName", 1));
+		short id = Short.parseShort(JOptionPane.showInputDialog(null,"Insira o ID para atualizar:", "testUpdate", 1));
 		
 		int choose = Integer.parseInt(JOptionPane.showInputDialog("Selecione o campo para atualização:\n1.Nome\n2.E-mail\n3.Senha\n4.Idade"));
 		
@@ -177,22 +177,22 @@ public class TestDatabase {
 		switch(choose) {
 		
 			case 1:
-				String name = JOptionPane.showInputDialog(null,"Insira o NOME para atualizar:", "testUpdateName", 1);
+				String name = JOptionPane.showInputDialog(null,"Insira o NOME para atualizar:", "testUpdate", 1);
 				user.setName(name);
 				break;
 			
 			case 2: 
-				String email = JOptionPane.showInputDialog(null,"Insira o E-MAIL para atualizar:", "testUpdateName", 1);
+				String email = JOptionPane.showInputDialog(null,"Insira o E-MAIL para atualizar:", "testUpdate", 1);
 				user.setEmail(email);
 				break;
 		
 			case 3:
-				String password = JOptionPane.showInputDialog(null,"Insira a SENHA para atualizar:", "testUpdateName", 1);
+				String password = JOptionPane.showInputDialog(null,"Insira a SENHA para atualizar:", "testUpdate", 1);
 				user.setPassword(password);
 				break;
 				
 			case 4: 
-				short age = Short.parseShort(JOptionPane.showInputDialog(null,"Insira o IDADE para atualizar:", "testUpdateName", 1));
+				short age = Short.parseShort(JOptionPane.showInputDialog(null,"Insira o IDADE para atualizar:", "testUpdate", 1));
 				user.setAge(age);
 				break;
 		
@@ -203,7 +203,7 @@ public class TestDatabase {
 		
 		JOptionPane.showMessageDialog(null, "Observe o console!");
 
-		dao.sqlUpdateName(user);
+		dao.sqlUpdate(user);
 		
 	}
 	

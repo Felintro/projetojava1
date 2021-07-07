@@ -43,10 +43,7 @@ public class DAO {
 		
 		/* Método em uso, insert para a tabela */
 			
-		try {
-			
-			ConfigConstant config = new ConfigConstant();
-			
+		try {		
 			
 			String query = "INSERT INTO ? (_name, _email, _password, _age) VALUES (?, ?, ?, ?);";
 			PreparedStatement insert = connection.prepareStatement(query);
@@ -74,8 +71,8 @@ public class DAO {
 			
 	}
 	
-	public void sqlUpdateName(ModelUser user) throws SQLException {
-		
+	public void sqlUpdate(ModelUser user) throws SQLException {
+
 		try {
 			
 			String query = "UPDATE ? SET _name = ?, _email = ?, _password = ?, _age = ?  WHERE _id = ?;";
