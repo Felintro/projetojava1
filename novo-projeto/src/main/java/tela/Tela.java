@@ -22,6 +22,7 @@ public class Tela {
 		jTela.setSize(300, 450);
 		jTela.setLocationRelativeTo(null);
 		
+		
 		jTela.setLayout(new FlowLayout(1, 5, 5));
 		
 		novoCadastro = new JButton("Cadastrar");
