@@ -39,20 +39,19 @@ public class DAO {
 	
 	/* Métodos para execução das queries SQL */
 	
-	public void sqlInsert(ModelUser user) throws SQLException {
+	public void sqlInsertRegister(ModelUser user) throws SQLException {
 		
 		/* Método em uso, insert para a tabela */
 			
 		try {		
 			
-			String query = "INSERT INTO ? (_name, _email, _password, _age) VALUES (?, ?, ?, ?);";
+			String query = "INSERT INTO register (_name, _email, _age, _password) VALUES (?, ?, ?, ?);";
 			PreparedStatement insert = connection.prepareStatement(query);
 
-			insert.setString(1, ConfigConstant.DATABASE_TABLE);
-			insert.setString(2, user.getName());
-			insert.setString(3, user.getEmail());
+			insert.setString(1, user.getName());
+			insert.setString(2, user.getEmail());
+			insert.setShort(3, user.getAge());
 			insert.setString(4, user.getPassword());
-			insert.setShort(5, user.getAge());
 			
 			insert.execute();
 			connection.commit();
@@ -71,20 +70,19 @@ public class DAO {
 			
 	}
 	
-	public void sqlUpdate(ModelUser user) throws SQLException {
+	public void sqlUpdateRegister(ModelUser user) throws SQLException {
 
 		try {
 			
-			String query = "UPDATE ? SET _name = ?, _email = ?, _password = ?, _age = ?  WHERE _id = ?;";
+			String query = "UPDATE register SET _name = ?, _email = ?, _password = ?, _age = ?  WHERE _id = ?;";
 			
 			PreparedStatement update = connection.prepareStatement(query);
 			
-			update.setString(1, ConfigConstant.DATABASE_TABLE);
-			update.setString(2, user.getName());
-			update.setString(3, user.getEmail());
-			update.setString(4, user.getPassword());
-			update.setShort(5, user.getAge());
-			update.setShort(6, user.getId());
+			update.setString(1, user.getName());
+			update.setString(2, user.getEmail());
+			update.setString(3, user.getPassword());
+			update.setShort(4, user.getAge());
+			update.setShort(5, user.getId());
 			
 			update.execute();
 			System.out.println("Atualização executada com sucesso!");
@@ -99,16 +97,15 @@ public class DAO {
 		
 	}
 	
-	public ModelUser sqlSelectById(short _id) throws SQLException {
+	public ModelUser sqlSelectByIdRegister(short _id) throws SQLException {
 		
 		/* Método em uso, select com filtro na coluna _id */
 		
 		ModelUser user = new ModelUser();
 		
-		String query = "SELECT * FROM ? WHERE _id= ?;";
+		String query = "SELECT * FROM register WHERE _id= ?;";
 		PreparedStatement selectById = connection.prepareStatement(query);
-		selectById.setString(1, ConfigConstant.DATABASE_TABLE);
-		selectById.setShort(2, _id);
+		selectById.setShort(1, _id);
 		ResultSet result = selectById.executeQuery();
 		
 		while(result.next()) {
@@ -121,7 +118,7 @@ public class DAO {
 		
 	}
 	
-	public List<ModelUser> sqlSelectByName(String _name) throws SQLException {
+	public List<ModelUser> sqlSelectByNameRegister(String _name) throws SQLException {
 		
 		/* Método em uso, select com filtro na coluna _name 
 		 * 
@@ -130,37 +127,34 @@ public class DAO {
 		 * 
 		 * */
 		
-		List<ModelUser> list = new ArrayList<>();
+		List<ModelUser> list = new ArrayList<ModelUser>();
 		
-		String query = "SELECT * FROM ? WHERE _name = '?';";
+		String query = "SELECT * FROM register WHERE _name = ?;";
 		/* No SQL usamos aspas simples '' para trabalhar com texto, por isso tivemos que aplicá-las acima */
 		
 		PreparedStatement selectByName = connection.prepareStatement(query);
-		selectByName.setString(1, ConfigConstant.DATABASE_TABLE);
-		selectByName.setString(2, _name);
+		selectByName.setString(1, _name);
 		ResultSet result = selectByName.executeQuery();
-		
-		
+
 		while(result.next()) {
-			
+
 			treatList(result, list);
-			
+
 		}
-		
+
 		return list;
-		
+
 	}
 	
-	public ModelUser sqlSelectByEmail(String _email) throws SQLException {
+	public ModelUser sqlSelectByEmailRegister(String _email) throws SQLException {
 		
 		/* Método em uso, select com filtro na coluna _email */
 		
 		ModelUser user = new ModelUser();
 		
-		String query = "SELECT * FROM ? WHERE _email = '?';";
+		String query = "SELECT * FROM register WHERE _email = ?;";
 		PreparedStatement selectByEmail = connection.prepareStatement(query);
-		selectByEmail.setString(1, ConfigConstant.DATABASE_TABLE);
-		selectByEmail.setString(2, _email);
+		selectByEmail.setString(1, _email);
 		ResultSet result = selectByEmail.executeQuery();
 		
 		treatModelUser(result, user);
@@ -169,16 +163,15 @@ public class DAO {
 			
 	}
 
-	public List<ModelUser> sqlSelectByAge(short _age) throws SQLException {
+	public List<ModelUser> sqlSelectByAgeRegister(short _age) throws SQLException {
 		
 		/* Método em uso, select com filtro na coluna _age */
 		
 		List<ModelUser> list = new ArrayList<>();
 		
-		String query = "SELECT * FROM ? WHERE _age = ?;";
+		String query = "SELECT * FROM register WHERE _age = ?;";
 		PreparedStatement selectByAge = connection.prepareStatement(query);
-		selectByAge.setString(1, ConfigConstant.DATABASE_TABLE);
-		selectByAge.setShort(2, _age);
+		selectByAge.setShort(1, _age);
 		ResultSet result = selectByAge.executeQuery();
 		
 		while (result.next()) {
@@ -198,7 +191,7 @@ public class DAO {
 		
 		for (ModelUser user : list) {
 			
-			sqlInsert(user);
+			sqlInsertRegister(user);
 			
 			try {
 				Thread.sleep(1000);

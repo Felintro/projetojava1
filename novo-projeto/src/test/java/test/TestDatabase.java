@@ -39,7 +39,7 @@ public class TestDatabase {
 		user.setPassword(_password);
 		user.setAge(_age);
 
-		dao.sqlInsert(user);
+		dao.sqlInsertRegister(user);
 		
 		/* Teste executado! */
 		
@@ -74,7 +74,7 @@ public class TestDatabase {
 		short id = Short.parseShort(JOptionPane.showInputDialog(null,"Insira o ID para consulta:", "testSelectById", 1));
 		
 		try {
-			user = dao.sqlSelectById(id);
+			user = dao.sqlSelectByIdRegister(id);
 			System.out.println(user);
 				
 		} catch (SQLException e) {
@@ -90,18 +90,18 @@ public class TestDatabase {
 	public void testSelectByName() {
 		
 		DAO dao = new DAO();
+		List<ModelUser> list = new ArrayList<>();
 		
 		String _name = JOptionPane.showInputDialog(null,"Insira o NOME para consulta:", "testSelectByName", 1);
 		
 		try {
 			
-			List<ModelUser> list = dao.sqlSelectByName(_name);
-			
+			list = dao.sqlSelectByNameRegister(_name);
+
 			for (ModelUser model : list) {
-				
+
 				System.out.println(model);
-				
-				
+
 			}
 		
 		} catch (SQLException e) {
@@ -122,7 +122,7 @@ public class TestDatabase {
 		
 		try {
 			
-			List<ModelUser> list = dao.sqlSelectByAge(age);
+			List<ModelUser> list = dao.sqlSelectByAgeRegister(age);
 			
 			for (ModelUser modelUser : list) {
 				System.out.println(modelUser);
@@ -142,20 +142,19 @@ public class TestDatabase {
 		
 		DAO dao = new DAO();
 		
-		
 		String email = JOptionPane.showInputDialog(null,"Insira o E-MAIL para consulta:", "testSelectByEmail", 1);
 		
 		try {
-			ModelUser user = dao.sqlSelectByEmail(email);
+			ModelUser user = dao.sqlSelectByEmailRegister(email);
 			System.out.println(user);
 				
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 			System.out.println("Erro!");
-			
-		}	
-		
+
+		}
+
 	}
 	
 	@Test
@@ -167,7 +166,7 @@ public class TestDatabase {
 		
 		int choose = Integer.parseInt(JOptionPane.showInputDialog("Selecione o campo para atualização:\n1.Nome\n2.E-mail\n3.Senha\n4.Idade"));
 		
-		ModelUser user = dao.sqlSelectById(id);
+		ModelUser user = dao.sqlSelectByIdRegister(id);
 		
 		System.out.println("Registro antigo:");
 		System.out.println(user);
@@ -203,7 +202,7 @@ public class TestDatabase {
 		
 		JOptionPane.showMessageDialog(null, "Observe o console!");
 
-		dao.sqlUpdate(user);
+		dao.sqlUpdateRegister(user);
 		
 	}
 	
