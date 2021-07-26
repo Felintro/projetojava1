@@ -23,7 +23,7 @@ public class ModelUser {
 	private String _password;
 	private short _age;
 	
-	/* Construtore */
+	/* Construtores */
 	
 	public ModelUser() {
 		
@@ -37,7 +37,7 @@ public class ModelUser {
 		this._age = _age;
 	}
 	
-	/* Gets e Sets */
+	/* Getters e Setters */
 	
 	public short getId() {
 		return _id;

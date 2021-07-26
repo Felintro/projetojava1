@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import constant.ConfigConstant;
 import jdbcconnection.SingleConnection;
+import model.ModelPhone;
 import model.ModelUser;
 
 /*  DAO criado para a tabela userposjava, alteração feita e migração de dados da
@@ -37,13 +37,13 @@ public class DAO {
 		connection = SingleConnection.getConnection();
 	}
 	
-	/* Métodos para execução das queries SQL */
+	/* ============================================================================
+	 * =========================INÍCIO DA TABELA REGISTER==========================
+	 * ============================================================================ */
 	
 	public void sqlInsertRegister(ModelUser user) throws SQLException {
-		
-		/* Método em uso, insert para a tabela */
 			
-		try {		
+		try {
 			
 			String query = "INSERT INTO register (_name, _email, _age, _password) VALUES (?, ?, ?, ?);";
 			PreparedStatement insert = connection.prepareStatement(query);
@@ -61,9 +61,8 @@ public class DAO {
 		
 		catch(Exception e) {
 			
-			System.out.println("Erro detectado!");
-			connection.rollback();		/* Reverter a operação em caso de captura de exceção */
-			System.out.println("Rollback executado com sucesso!\nQuery revertida.");
+			connection.rollback();
+			System.out.println("Erro identificado!\n\nQuery revertida!\n\n");
 			e.printStackTrace();
 				
 		}
@@ -108,7 +107,7 @@ public class DAO {
 		selectById.setShort(1, _id);
 		ResultSet result = selectById.executeQuery();
 		
-		while(result.next()) {
+		if(result.next()) {
 			
 			treatModelUser(result, user);
 			
@@ -182,7 +181,7 @@ public class DAO {
 		
 		return list;
 	}
-	
+		
 	public void TransferToRegister() throws SQLException { 
 		
 	/* Método criado para transferir os dados da tabela userposjava para a tabela register */
@@ -202,6 +201,91 @@ public class DAO {
 		}
 		
 	}
+	
+	/* ============================================================================
+	 * ==========================FIM DA TABELA REGISTER============================
+	 * ============================================================================ */
+	
+	/* ============================================================================
+	 * ==========================INÍCIO DA TABELA PHONE============================
+	 * ============================================================================ */
+	
+	public void sqlInsertPhone(ModelPhone modelPhone) throws SQLException {
+		
+		try {
+			
+			String query = "INSERT INTO phone(_number, _type, _user_id) VALUES (?, ?, ?);";
+			PreparedStatement insert = connection.prepareStatement(query);
+			
+			insert.setString(1, modelPhone.get_number());
+			insert.setString(2, modelPhone.get_type());
+			insert.setShort(3, modelPhone.get_user_id());
+			
+			insert.execute();
+			connection.commit();
+			
+			System.out.println("Query executada com sucesso!");
+			
+		} catch (Exception e) {
+			
+			System.out.println("Erro detectado!");
+			connection.rollback();		/* Reverter a operação em caso de captura de exceção */
+			System.out.println("Rollback executado com sucesso!\nQuery revertida.");
+			e.printStackTrace();
+			
+		}
+		
+	}
+	
+	public void sqlUpdatePhone (ModelPhone modelPhone) throws SQLException {
+		
+		try {
+			
+			String query = "UPDATE phone SET _number=?, _type=?, _user_id=? WHERE _id=?;";
+			PreparedStatement update = connection.prepareStatement(query);
+			
+			update.setString(1, modelPhone.get_number());
+			update.setString(2, modelPhone.get_type());
+			update.setShort(3, modelPhone.get_user_id());
+			update.setShort(4, modelPhone.get_id());
+			
+			update.execute();
+			connection.commit();
+			
+			System.out.println("Atualização efetuada com sucesso!");
+			
+		} catch (Exception e) {
+			
+			connection.rollback();
+			System.out.println("Erro identificado!\n\nQuery revertida!\n\n");
+			e.printStackTrace();
+			
+		}
+		
+	}
+	
+	public ModelPhone sqlSelectByIdPhone (short _id) throws SQLException {
+		
+		ModelPhone phone = new ModelPhone();
+		String query = "SELECT * FROM phone WHERE _id=?;";
+		PreparedStatement selectById = connection.prepareStatement(query);
+		
+		selectById.setShort(1, _id);
+		ResultSet result = selectById.executeQuery();
+		
+		while (result.next()) {
+			
+			treatModelPhone(result, phone);
+			
+		}
+		
+		return phone;
+		
+	}
+	
+	/* ============================================================================
+	 * ===========================FIM DA TABELA PHONE==============================
+	 * ============================================================================ */
 	
 	/* Métodos obsoletos (aplicados a tabela userposjava) */
 	
@@ -262,7 +346,7 @@ public class DAO {
 	private void treatList(ResultSet result, List<ModelUser> list) throws SQLException {
 		
 	/* Método responsável por receber um ResultSet e uma lista de objetos ModelUser,
-	*  setar os atributos do objeto e inserir na lista.
+	*  setar os atributos do objeto e inserir o mesmo na lista.
 	*/
 			
 		ModelUser user = new ModelUser();
@@ -279,8 +363,8 @@ public class DAO {
 	
 	private void treatModelUser(ResultSet result, ModelUser user) throws SQLException {
 		
-	/* Método responsável por receber um ResultSet e um ModelUser
-	*  e setar os atributos do objeto ao receber um ResultSet vindo de uma consulta ao banco de dados
+	/* Método responsável por receber um ResultSet e um ModelUser e setar os atributos
+	*  do objeto ao receber um ResultSet vindo de uma consulta ao banco de dados.
 	*/
 		
 		user.setId(result.getShort("_id"));
@@ -288,6 +372,20 @@ public class DAO {
 		user.setEmail(result.getString("_email"));
 		user.setPassword(result.getString("_password"));
 		user.setAge(result.getShort("_age"));
+		
+	}
+	
+	private void treatModelPhone (ResultSet result, ModelPhone phone) throws SQLException {
+		
+		/* 
+		*  Método responsável por receber um ResultSet e um ModelPhone e setar os atributos
+		*  do objeto ao receber um ResultSet vindo de uma consulta ao banco de dados.
+		*/
+		
+		phone.set_id(result.getShort("_id"));
+		phone.set_number(result.getString("_number"));
+		phone.set_type(result.getString("_type"));
+		phone.set_user_id(result.getShort("_user_id"));
 		
 	}
 
