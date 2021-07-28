@@ -3,6 +3,7 @@ package test;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 
@@ -254,5 +255,99 @@ public class TestDatabase {
 		JOptionPane.showMessageDialog(null, "Observe o console!");
 
 	}
+	
+	@Test
+	public void testInsert() throws SQLException {
+		
+		DAO dao = new DAO();
+		ModelUser user = new ModelUser();
+		ModelPhone phone = new ModelPhone();
+		
+		Random gerador = new Random();
+		
+		String nome;
+		String email;
+		int idade;
+		String senha;
+		
+		String numero;
+		String tipo="";
+		short idusuario;
+		int ddi;
+		int ddd;
+		int n1;
+		int n2;
+		int tipoint;
+		
+		/* Início do processamento */
+		
+		for(int i=10000; i<100000; i++) { 
+			nome = "Usuário teste nº " + i;
+			email = "testen"+i+"@testen"+i+".com.br";
+			idade = gerador.nextInt(95)+1;
+			senha = "" + (gerador.nextInt(99999999) + 10000000);
+			
+			user.setName(nome);
+			user.setEmail(email);
+			user.setAge((short) idade);
+			user.setPassword(senha);
+			
+			dao.sqlInsertRegister(user);
+			System.out.println("==============================================");
+			System.out.println(user);
+			
+			for(int j=0; j<6; j++) {
+				
+				ddd = gerador.nextInt(99)+1;
+				ddi = gerador.nextInt(999)+1;
+				n1 = gerador.nextInt(9999)+1000;
+				n2 = gerador.nextInt(9999)+1000;
 
+				numero = "+"+ddi+" ("+ddd+") "+n1+"-"+n2;
+				idusuario = (short) (i+4);
+				
+				switch (tipoint = gerador.nextInt(4)+1) {
+					case 1:
+						tipo = "Celular";
+						break;
+						
+					case 2:
+						tipo = "Residencial";
+						break;
+						
+					case 3:
+						tipo = "Comercial";
+						break;
+						
+					case 4:
+						tipo = "Corporativo";
+						break;
+	
+					default: break;
+				}
+				
+				phone.set_number(numero);
+				phone.set_type(tipo);
+				phone.set_user_id(idusuario);
+				
+				dao.sqlInsertPhone(phone);
+				
+				System.out.println(phone);
+				
+				/*try {
+					Thread.sleep(0,100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} */
+				
+			}
+			
+			System.out.println("==============================================");
+		
+		}
+		
+		/* Fim do processamento */
+		
+	} /* Fim Teste Insert em Lote! */
+	
 }
