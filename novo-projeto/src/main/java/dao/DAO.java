@@ -379,7 +379,7 @@ public class DAO {
 		
 		/* 
 		*  Método responsável por receber um ResultSet e um ModelPhone e setar os atributos
-		*  do objeto ao receber um ResultSet vindo de uma consulta ao banco de dados.
+		*  do objeto ao receber um ResultSet selecionado de uma consulta ao banco de dados.
 		*/
 		
 		phone.set_id(result.getShort("_id"));

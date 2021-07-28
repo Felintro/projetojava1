@@ -342,7 +342,7 @@ public class TestDatabase {
 				
 			}
 			
-			System.out.println("=============================================");
+			System.out.println("============================================");
 		
 		}
 		
