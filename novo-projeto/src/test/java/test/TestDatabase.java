@@ -263,7 +263,7 @@ public class TestDatabase {
 		ModelUser user = new ModelUser();
 		ModelPhone phone = new ModelPhone();
 		
-		Random gerador1 = new Random();
+		Random gerador = new Random();
 		
 		String nome;
 		String email;
@@ -284,8 +284,8 @@ public class TestDatabase {
 		for(int i=10000; i<100000; i++) { 
 			nome = "Usuário teste nº " + i;
 			email = "testen"+i+"@testen"+i+".com.br";
-			idade = gerador1.nextInt(95)+1;
-			senha = "" + (gerador1.nextInt(99999999) + 10000000);
+			idade = gerador.nextInt(95)+1;
+			senha = "" + (gerador.nextInt(99999999) + 10000000);
 			
 			user.setName(nome);
 			user.setEmail(email);
@@ -298,15 +298,15 @@ public class TestDatabase {
 			
 			for(int j=0; j<6; j++) {
 				
-				ddd = gerador1.nextInt(99)+1;
-				ddi = gerador1.nextInt(999)+1;
-				n1 = gerador1.nextInt(9999)+1000;
-				n2 = gerador1.nextInt(9999)+1000;
+				ddd = gerador.nextInt(99)+1;
+				ddi = gerador.nextInt(999)+1;
+				n1 = gerador.nextInt(9999)+1000;
+				n2 = gerador.nextInt(9999)+1000;
 
 				numero = "+"+ddi+" ("+ddd+") "+n1+"-"+n2;
 				idusuario = (short) (i+4);
 				
-				switch (tipoint = gerador1.nextInt(4)+1) {
+				switch (tipoint = gerador.nextInt(4)+1) {
 					case 1:
 						tipo = "Celular";
 						break;
