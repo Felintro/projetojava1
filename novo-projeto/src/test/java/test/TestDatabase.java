@@ -305,8 +305,8 @@ public class TestDatabase {
 
 				numero = "+"+ddi+" ("+ddd+") "+n1+"-"+n2;
 				idusuario = (short) (i+4);
-				
-				switch (tipoint = gerador.nextInt(4)+1) {
+				tipoint = gerador.nextInt(4)+1;
+				switch (tipoint) {
 					case 1:
 						tipo = "Celular";
 						break;

@@ -1,7 +1,5 @@
 package constant;
 
-import java.sql.Connection;
-
 public class ConfigConstant {
 	
 	/* Classe para ajustes de parametros */
