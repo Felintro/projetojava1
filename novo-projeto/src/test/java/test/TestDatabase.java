@@ -375,7 +375,7 @@ public class TestDatabase {
 			ModelAddress address = new ModelAddress(number, (short) i, country, state, city, street);
 			
 			dao.sqlInsertAddress(address);
-			
+			  
 		}
 		
 	}
