@@ -2,6 +2,7 @@ package test;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import dao.DAO;
 import jdbcconnection.SingleConnection;
+import model.ModelAddress;
 import model.ModelPhone;
 import model.ModelUser;
 
@@ -257,40 +259,40 @@ public class TestDatabase {
 	}
 	
 	@Test
-	public void testInsert() throws SQLException {
+	public void testInsertBatch() throws SQLException {
 		
 		DAO dao = new DAO();
 		ModelUser user = new ModelUser();
 		ModelPhone phone = new ModelPhone();
 		
-		Random gerador = new Random();
+		Random random = new Random();
 		
-		String nome;
+		String name;
 		String email;
-		int idade;
-		String senha;
+		int age;
+		String password;
 		
-		String numero;
-		String tipo="";
-		short idusuario;
+		String number;
+		String type="";
+		short userid;
 		int ddi;
 		int ddd;
 		int n1;
 		int n2;
-		int tipoint;
+		int typeint;
 		
 		/* Início do processamento */
 		
-		for(int i=10000; i<100000; i++) { 
-			nome = "Usuário teste nº " + i;
+		for(int i=1; i<=5000; i++) { 
+			name = "Usuário teste nº " + i;
 			email = "testen"+i+"@testen"+i+".com.br";
-			idade = gerador.nextInt(95)+1;
-			senha = "" + (gerador.nextInt(99999999) + 10000000);
+			age = random.nextInt(95)+1;
+			password = "" + (random.nextInt(99999999) + 10000000);
 			
-			user.setName(nome);
+			user.setName(name);
 			user.setEmail(email);
-			user.setAge((short) idade);
-			user.setPassword(senha);
+			user.setAge((short) age);
+			user.setPassword(password);
 			
 			dao.sqlInsertRegister(user);
 			System.out.println("==============================================");
@@ -298,41 +300,41 @@ public class TestDatabase {
 			
 			for(int j=0; j<6; j++) {
 				
-				ddd = gerador.nextInt(99)+1;
-				ddi = gerador.nextInt(999)+1;
-				n1 = gerador.nextInt(9999)+1000;
-				n2 = gerador.nextInt(9999)+1000;
+				ddd = random.nextInt(99)+1;
+				ddi = random.nextInt(999)+1;
+				n1 = random.nextInt(9999)+1000;
+				n2 = random.nextInt(9999)+1000;
 
-				numero = "+"+ddi+" ("+ddd+") "+n1+"-"+n2;
-				idusuario = (short) (i+4);
-				tipoint = gerador.nextInt(4)+1;
-				switch (tipoint) {
+				number = "+"+ddi+" ("+ddd+") "+n1+"-"+n2;
+				userid = (short) (i);
+				typeint = random.nextInt(4)+1;
+				switch (typeint) {
 					case 1:
-						tipo = "Celular";
+						type = "Celular";
 						break;
 						
 					case 2:
-						tipo = "Residencial";
+						type = "Residencial";
 						break;
 						
 					case 3:
-						tipo = "Comercial";
+						type = "Comercial";
 						break;
 						
 					case 4:
-						tipo = "Corporativo";
+						type = "Corporativo";
 						break;
 	
 					default: break;
 				}
 				
-				phone.set_number(numero);
-				phone.set_type(tipo);
-				phone.set_user_id(idusuario);
-				
-				dao.sqlInsertPhone(phone);
+				phone.set_number(number);
+				phone.set_type(type);
+				phone.set_user_id(userid);
 				
 				System.out.println(phone);
+				dao.sqlInsertPhone(phone);
+				
 				
 				/*try {
 					Thread.sleep(0,100);
@@ -349,5 +351,33 @@ public class TestDatabase {
 		/* Fim do processamento */
 		
 	} /* Fim Teste Insert em Lote! */
+	
+	@Test
+	public void testInsertAddressBatch() throws SQLException {
+		
+		DAO dao = new DAO();
+		Random random = new Random();
+			
+		for (int i=1; i<=5000; i++) {
+			String country = "País teste nº" + i;
+			String state = "Estado teste nº" + i;
+			String city = "Cidade teste nº" + i;
+			String street = "Rua teste nº" + i;
+			short number = (short) (random.nextInt(1000)+1);
+			
+		/*	address.set_city(city);
+			address.set_country(country);
+			address.set_id(number);
+			address.set_state(state);
+			address.set_street(street);
+			address.set_user_id((short) i); */
+			
+			ModelAddress address = new ModelAddress(number, (short) i, country, state, city, street);
+			
+			dao.sqlInsertAddress(address);
+			
+		}
+		
+	}
 	
 }

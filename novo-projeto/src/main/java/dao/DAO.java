@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jdbcconnection.SingleConnection;
+import model.ModelAddress;
 import model.ModelPhone;
 import model.ModelUser;
 
@@ -286,6 +287,56 @@ public class DAO {
 	/* ============================================================================
 	 * ===========================FIM DA TABELA PHONE==============================
 	 * ============================================================================ */
+	
+	/* ============================================================================
+	 * ========================INÍCIO DA TABELA ADDRESS============================
+	 * ============================================================================ */
+	
+	public void sqlInsertAddress(ModelAddress address) throws SQLException {
+
+		try {
+			
+			String query = "INSERT INTO address(_country, _state, _city, _street, _number, _user_id) VALUES (?, ?, ?, ?, ?, ?);";
+			PreparedStatement insert = connection.prepareStatement(query);
+			
+			insert.setString(1, address.get_country());
+			insert.setString(2, address.get_state());
+			insert.setString(3, address.get_city());
+			insert.setString(4, address.get_street());
+			insert.setShort(5, address.get_number());
+			insert.setShort(6, address.get_user_id());
+			
+			
+			insert.execute();
+			connection.commit();
+			System.out.println("Query executada com sucesso!");
+			
+		}
+		
+		catch(Exception e) {
+			connection.rollback();
+			System.out.println("Erro identificado!\n\nQuery revertida!\n\n");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/* ============================================================================
+	 * ==========================FIM DA TABELA ADDRESS=============================
+	 * ============================================================================ */
+	
 	
 	/* Métodos obsoletos (aplicados a tabela userposjava) */
 	
