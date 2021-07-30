@@ -7,7 +7,6 @@
 		<title>Curso JSP</title>
 	</head>
 	
-	
 	<body>
 	
 	
