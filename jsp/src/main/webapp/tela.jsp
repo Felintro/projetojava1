@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<title>tela.jsp</title>
+		<title>Curso JSP</title>
 	</head>
 	
 	
@@ -17,6 +17,8 @@
 		String idade = request.getParameter("idade");
 		out.println("Nome: " + nome + "<br>Idade: " + idade);
 	%>
+	
+	<label></label>
 	
 	</body>
 	

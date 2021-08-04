@@ -19,7 +19,7 @@
 					<input name="nome"> <br> 
 				</div>
 				
-				<div>	
+				<div>
 					<label>Idade:</label>
 					<input name="idade">
 				</div>
