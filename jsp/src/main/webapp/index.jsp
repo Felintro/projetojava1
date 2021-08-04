@@ -13,21 +13,30 @@
 	
 		<fieldset>
 	
-			<form action="tela.jsp" method="post">
-				<div>
-					<label>Nome:</label> 
-					<input name="nome"> <br> 
-				</div>
-				
-				<div>
-					<label>Idade:</label>
-					<input name="idade">
-				</div>
-				
-				<input type="submit" value="Enviar">
-				
-			</form>
+			<form action="ServletLogin" method="post">
+				<table>
 	
+					<tr>
+						<td><label>Login: </label></td>
+	
+						<td><input name="login" type="text"></td>
+					</tr>
+	
+					<tr>
+						<td><label>Senha: </label></td>
+	
+						<td><input name="senha" type="password"></td>
+					</tr>
+	
+					<tr>
+						<td colspan="2"><input type="submit" value="Enviar"></td>
+					</tr>
+
+				</table>
+	
+			</form>
+			
+			<h4>${teste}</h4>
 	
 		</fieldset>
 	
