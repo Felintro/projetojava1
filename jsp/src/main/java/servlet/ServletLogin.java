@@ -23,11 +23,11 @@ public class ServletLogin extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	/* Recebe os dados pela URL em parâmetros */
-		
+
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	/* Recebe os dados enviados por um formulário */
+		/* Recebe os dados enviados por um formulário */
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
 		
@@ -36,15 +36,29 @@ public class ServletLogin extends HttpServlet {
 			ModelLogin modelLogin = new ModelLogin();
 			modelLogin.setLogin(login);
 			modelLogin.setSenha(senha);
+			
+			if (modelLogin.getLogin().equalsIgnoreCase("admin") && modelLogin.getSenha().equalsIgnoreCase("admin")) {
+				
+				request.getSession().setAttribute("usuario", modelLogin.getLogin());
+				RequestDispatcher redirecionador = request.getRequestDispatcher("principal/principal.jsp");
+				redirecionador.forward(request, response);
+				
+				
+			} else {
+				
+				RequestDispatcher redirecionador = request.getRequestDispatcher("index.jsp");
+				request.setAttribute("msg", "Informe login e senha corretamente!");
+				redirecionador.forward(request, response);
+				
+			}
 
 		} else {
 			
 			RequestDispatcher redirecionador = request.getRequestDispatcher("index.jsp");
-			request.setAttribute("teste", "Informe login e senha corretamente!");
+			request.setAttribute("msg", "Informe login e senha corretamente!");
 			redirecionador.forward(request, response);
 			
 		}
-		
 		
 	}
 

@@ -36,7 +36,7 @@
 	
 			</form>
 			
-			<h4>${teste}</h4>
+			<h4>${msg}</h4>
 	
 		</fieldset>
 	
